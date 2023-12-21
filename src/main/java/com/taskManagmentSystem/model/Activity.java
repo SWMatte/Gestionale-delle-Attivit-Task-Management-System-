@@ -1,14 +1,18 @@
 package com.taskManagmentSystem.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,8 @@ public class Activity {
     private String description;
 
     private LocalDate creationDate;
+
+    private boolean deleteFlag;
 
     @Enumerated(EnumType.STRING)
     private Category activityCategory;
