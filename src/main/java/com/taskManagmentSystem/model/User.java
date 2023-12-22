@@ -23,7 +23,7 @@ public class User {
     private int idUser;
     private String name;
     private String lastName;
-    private int age;
+    private Integer age;
     private LocalDate creationDate;
     private boolean deleteFlag;
 }
