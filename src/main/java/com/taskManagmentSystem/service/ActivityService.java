@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface ActivityService {
 
-    void addElement(ActivityDTO activityDTO);
+    void addElement(ActivityDTO activityDTO) throws Exception;
 
-    List<Activity> allActivity(String[] params);
+    List<Activity> allActivity(String[] params) throws Exception;
 
-    void modifyActivity(ActivityDTO updateActivityDTO);
+    void modifyActivity(ActivityDTO updateActivityDTO) throws Exception;
 
-    void deleteActivity(int id);
+    void deleteActivity(int id) throws Exception;
 
 }

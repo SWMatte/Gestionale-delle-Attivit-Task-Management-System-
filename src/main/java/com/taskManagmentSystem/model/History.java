@@ -29,6 +29,9 @@ public class History {
 
     private boolean deleteFlag;
 
+    private String note;
+
+
     @ManyToOne
     @JoinColumn(name = "idUser")
     private User idUser;
