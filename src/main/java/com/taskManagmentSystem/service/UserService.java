@@ -1,6 +1,6 @@
 package com.taskManagmentSystem.service;
 
-import com.taskManagmentSystem.model.DTO.UserDTO;
+import com.taskManagmentSystem.model.DTO.request.UserDTO;
 import com.taskManagmentSystem.model.User;
 
 import java.util.List;

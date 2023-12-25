@@ -1,8 +1,45 @@
 package com.taskManagmentSystem.repository;
 
 import com.taskManagmentSystem.model.Activity;
+import com.taskManagmentSystem.model.Category;
+import com.taskManagmentSystem.model.DTO.response.ActivityResponseDTO;
 import com.taskManagmentSystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-public interface ActivityRepository extends JpaRepository<Activity,Integer> {
+import java.util.List;
+
+public interface ActivityRepository extends JpaRepository<Activity, Integer> {
+
+
+    @Query("""
+                SELECT new com.taskManagmentSystem.model.DTO.response.ActivityResponseDTO(
+                    a.activityName ,
+                    a.description,
+                    a.creationDate,
+                    a.activityCategory ,
+                    u.name,
+                    u.lastName)
+                FROM Activity a
+                JOIN a.idUser u
+                WHERE a.activityCategory LIKE :params
+                AND a.deleteFlag = false
+            """)
+    List<ActivityResponseDTO> findAllActivity(Category params);
+
+
+    @Query("""
+                SELECT new com.taskManagmentSystem.model.DTO.response.ActivityResponseDTO(
+                    a.activityName ,
+                    a.description,
+                    a.creationDate,
+                    a.activityCategory ,
+                    u.name,
+                    u.lastName)
+                FROM Activity a
+                JOIN a.idUser u
+               WHERE a.deleteFlag = false
+            """)
+    List<ActivityResponseDTO> findAllActivityNoFilter();
 }

@@ -1,4 +1,4 @@
-package com.taskManagmentSystem.model.DTO;
+package com.taskManagmentSystem.model.DTO.request;
 
 import com.taskManagmentSystem.model.Activity;
 

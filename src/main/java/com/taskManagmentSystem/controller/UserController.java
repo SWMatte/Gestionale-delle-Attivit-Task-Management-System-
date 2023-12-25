@@ -1,6 +1,6 @@
 package com.taskManagmentSystem.controller;
 
-import com.taskManagmentSystem.model.DTO.UserDTO;
+import com.taskManagmentSystem.model.DTO.request.UserDTO;
 import com.taskManagmentSystem.model.User;
 import com.taskManagmentSystem.service.UserService;
 import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,10 @@
 package com.taskManagmentSystem.service;
 
 import com.taskManagmentSystem.model.Activity;
-import com.taskManagmentSystem.model.DTO.ActivityDTO;
+import com.taskManagmentSystem.model.Category;
+import com.taskManagmentSystem.model.DTO.request.ActivityDTO;
+import com.taskManagmentSystem.model.DTO.response.ActivityResponseDTO;
 import com.taskManagmentSystem.model.History;
-import com.taskManagmentSystem.model.StatusActivity;
 import com.taskManagmentSystem.model.User;
 import com.taskManagmentSystem.repository.ActivityRepository;
 import com.taskManagmentSystem.repository.HistoryRepository;
@@ -73,8 +74,25 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> allActivity(String[] params) throws Exception {
-        return null;
+    public List<ActivityResponseDTO> allActivity(String params) throws Exception {
+        log.info("Enter into: ActivityServiceImpl - allActivity");
+        List<ActivityResponseDTO> response = null;
+        if(!params.isEmpty()){
+
+            Category category = Category.valueOf(params.toUpperCase());
+            log.info("Fetch all filtered data  - allActivity");
+            response = activityRepository.findAllActivity(category);
+        } else{
+            log.info("Fetch all data  - allActivity");
+            response = activityRepository.findAllActivityNoFilter();
+
+        }
+
+
+
+        log.info("Finish method - allActivity");
+
+        return response;
     }
 
     @Override
@@ -82,7 +100,7 @@ public class ActivityServiceImpl implements ActivityService {
         log.info("Enter into: ActivityServiceImpl - modifyActivity");
         if (updateActivityDTO.getHistory() == null) {
             Activity activity = activityRepository.findById(updateActivityDTO.getIdActivity()).get();
-            log.info("Try to find activity with ID {}",updateActivityDTO.getIdActivity());
+            log.info("Try to find activity with ID {}", updateActivityDTO.getIdActivity());
             if (activity != null) {
                 if (updateActivityDTO.getActivityName() != null) {
                     activity.setActivityName(updateActivityDTO.getActivityName());

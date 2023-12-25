@@ -1,7 +1,9 @@
 package com.taskManagmentSystem.service;
 
 import com.taskManagmentSystem.model.Activity;
-import com.taskManagmentSystem.model.DTO.ActivityDTO;
+import com.taskManagmentSystem.model.Category;
+import com.taskManagmentSystem.model.DTO.request.ActivityDTO;
+import com.taskManagmentSystem.model.DTO.response.ActivityResponseDTO;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ public interface ActivityService {
 
     void addElement(ActivityDTO activityDTO) throws Exception;
 
-    List<Activity> allActivity(String[] params) throws Exception;
+    List<ActivityResponseDTO> allActivity(String params) throws Exception;
 
     void modifyActivity(ActivityDTO updateActivityDTO) throws Exception;
 

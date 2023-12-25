@@ -29,7 +29,7 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private Category activityCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser")
     private User idUser;
 }

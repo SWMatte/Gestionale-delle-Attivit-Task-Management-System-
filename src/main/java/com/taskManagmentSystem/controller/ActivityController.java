@@ -1,14 +1,15 @@
 package com.taskManagmentSystem.controller;
 
-import com.taskManagmentSystem.model.DTO.ActivityDTO;
+import com.taskManagmentSystem.model.Category;
+import com.taskManagmentSystem.model.DTO.request.ActivityDTO;
+import com.taskManagmentSystem.model.DTO.response.ActivityResponseDTO;
 import com.taskManagmentSystem.service.ActivityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("activity")
@@ -36,6 +37,20 @@ public class ActivityController {
             log.info("Enter into ActivityController - method: modifyActivity");
             activityService.modifyActivity(activityDTO);
             return ResponseEntity.ok("Activity modified correctly");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().body("Error with parameters");
+        }
+    }
+
+
+    @GetMapping()
+    public ResponseEntity<?> allActivity(@RequestParam String params) {
+        try {
+//            Category category = Category.valueOf(params.toUpperCase());
+            log.info("Enter into ActivityController - method: allActivity");
+            List<ActivityResponseDTO> response = activityService.allActivity(params);
+            return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.badRequest().body("Error with parameters");
