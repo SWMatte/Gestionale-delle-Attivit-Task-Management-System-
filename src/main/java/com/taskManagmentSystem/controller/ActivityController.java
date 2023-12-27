@@ -56,4 +56,20 @@ public class ActivityController {
             return ResponseEntity.badRequest().body("Error with parameters");
         }
     }
+
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteActivity(@RequestParam int id) {
+        try {
+            log.info("Enter into ActivityController - method: deleteActivity");
+            activityService.deleteActivity(id);
+            return ResponseEntity.ok("Activity deleted correctly");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().body("Error with parameters");
+        }
+    }
+
+
+
 }

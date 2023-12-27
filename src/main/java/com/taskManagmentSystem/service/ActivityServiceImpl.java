@@ -88,8 +88,6 @@ public class ActivityServiceImpl implements ActivityService {
 
         }
 
-
-
         log.info("Finish method - allActivity");
 
         return response;
@@ -128,6 +126,17 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public void deleteActivity(int id) throws Exception {
-
+        log.info("Enter into: ActivityServiceImpl - deleteActivity");
+    if(id!=0){
+        log.info("Finding the activity with ID {}",id);
+        Activity activity = activityRepository.findById(id).get();
+        activity.setDeleteFlag(true);
+        log.info("Eliminated logically the activity");
+        activityRepository.save(activity);
+        log.info("Finish - method : deleteActivity");
+    } else {
+        log.error("Error activity not found with this ID {}", id);
+        throw new Exception();
+    }
     }
 }
