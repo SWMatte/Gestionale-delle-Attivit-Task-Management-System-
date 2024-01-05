@@ -74,17 +74,17 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<ActivityResponseDTO> allActivity(String params) throws Exception {
+    public List<ActivityResponseDTO> allActivity(String params,int IdUser) throws Exception {
         log.info("Enter into: ActivityServiceImpl - allActivity");
         List<ActivityResponseDTO> response = null;
         if(!params.isEmpty()){
 
             Category category = Category.valueOf(params.toUpperCase());
             log.info("Fetch all filtered data  - allActivity");
-            response = activityRepository.findAllActivity(category);
+            response = activityRepository.findAllActivity(category,IdUser);
         } else{
             log.info("Fetch all data  - allActivity");
-            response = activityRepository.findAllActivityNoFilter();
+            response = activityRepository.findAllActivityNoFilter(IdUser);
 
         }
 

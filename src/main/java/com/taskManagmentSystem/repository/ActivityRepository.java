@@ -23,10 +23,10 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
                     u.lastName)
                 FROM Activity a
                 JOIN a.idUser u
-                WHERE a.activityCategory LIKE :params
+                WHERE a.activityCategory LIKE :params AND u.idUser =:idUser
                 AND a.deleteFlag = false
             """)
-    List<ActivityResponseDTO> findAllActivity(Category params);
+    List<ActivityResponseDTO> findAllActivity(Category params,int idUser);
 
 
     @Query("""
@@ -39,7 +39,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
                     u.lastName)
                 FROM Activity a
                 JOIN a.idUser u
-               WHERE a.deleteFlag = false
+               WHERE a.deleteFlag = false AND u.idUser =:idUser
             """)
-    List<ActivityResponseDTO> findAllActivityNoFilter();
+    List<ActivityResponseDTO> findAllActivityNoFilter(int idUser);
 }

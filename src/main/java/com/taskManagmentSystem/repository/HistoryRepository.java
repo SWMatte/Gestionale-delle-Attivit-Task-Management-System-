@@ -5,4 +5,9 @@ import com.taskManagmentSystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HistoryRepository extends JpaRepository<History,Integer> {
+
+
+    History findByidActivityIdActivity(int idActivity);
+
+
 }

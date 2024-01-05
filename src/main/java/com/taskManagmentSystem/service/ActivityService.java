@@ -11,7 +11,7 @@ public interface ActivityService {
 
     void addElement(ActivityDTO activityDTO) throws Exception;
 
-    List<ActivityResponseDTO> allActivity(String params) throws Exception;
+    List<ActivityResponseDTO> allActivity(String params,int idUser) throws Exception;
 
     void modifyActivity(ActivityDTO updateActivityDTO) throws Exception;
 
