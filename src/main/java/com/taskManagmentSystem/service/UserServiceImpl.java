@@ -1,10 +1,12 @@
 package com.taskManagmentSystem.service;
 
+import com.taskManagmentSystem.model.Authentication;
 import com.taskManagmentSystem.model.DTO.request.UserDTO;
 import com.taskManagmentSystem.model.User;
 import com.taskManagmentSystem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,22 +15,31 @@ import java.util.List;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public void createUser(UserDTO userDTO) throws Exception {
+    public Authentication createUser(UserDTO userDTO) throws Exception {
         log.info("Enter into: UserServiceImpl - createUser");
+        Authentication auth  = null;
         if (userDTO != null) {
             User user = User.builder().name(userDTO.getName()).lastName(userDTO.getLastName()).age(userDTO.getAge()).creationDate(LocalDate.now()).build();
             userRepository.save(user);
             log.info("User added - finish method : createUser");
 
+            log.info("Start to create an authenticator");
+
+
+
+            log.info("Authenticator created correctly");
+
         } else {
             log.error("Error into UserServiceImpl - createUser");
             throw new Exception();
         }
+        return  auth;
     }
 
     @Override

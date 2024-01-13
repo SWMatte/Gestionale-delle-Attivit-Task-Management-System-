@@ -1,5 +1,6 @@
 package com.taskManagmentSystem.service;
 
+import com.taskManagmentSystem.model.Authentication;
 import com.taskManagmentSystem.model.DTO.request.UserDTO;
 import com.taskManagmentSystem.model.User;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public interface UserService {
 
 
-    void createUser(UserDTO userDTO) throws Exception;
+    Authentication createUser(UserDTO userDTO) throws Exception;
 
     void updateUser(UserDTO userDTO) throws Exception;
 

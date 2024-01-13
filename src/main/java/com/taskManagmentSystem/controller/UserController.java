@@ -1,6 +1,8 @@
 package com.taskManagmentSystem.controller;
 
+import com.taskManagmentSystem.aspect.Authorized;
 import com.taskManagmentSystem.model.DTO.request.UserDTO;
+import com.taskManagmentSystem.model.Role;
 import com.taskManagmentSystem.model.User;
 import com.taskManagmentSystem.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @Slf4j
 public class UserController {
     @Autowired
@@ -46,6 +48,7 @@ public class UserController {
     }
 
     @GetMapping()
+    @Authorized(roles = Role.ADMIN)
     public ResponseEntity<?> getUser(@RequestParam String search) {
         try {
             log.info("Enter into UserController - method: getUser");
