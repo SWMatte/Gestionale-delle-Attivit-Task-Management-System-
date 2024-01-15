@@ -74,18 +74,17 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<ActivityResponseDTO> allActivity(String params,int IdUser) throws Exception {
+    public List<ActivityResponseDTO> allActivity(String params, int IdUser) throws Exception {
         log.info("Enter into: ActivityServiceImpl - allActivity");
         List<ActivityResponseDTO> response = null;
-        if(!params.isEmpty()){
+        if (!params.isEmpty()) {
 
             Category category = Category.valueOf(params.toUpperCase());
             log.info("Fetch all filtered data  - allActivity");
-            response = activityRepository.findAllActivity(category,IdUser);
-        } else{
+            response = activityRepository.findAllActivity(category, IdUser);
+        } else {
             log.info("Fetch all data  - allActivity");
             response = activityRepository.findAllActivityNoFilter(IdUser);
-
         }
 
         log.info("Finish method - allActivity");
@@ -127,16 +126,16 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public void deleteActivity(int id) throws Exception {
         log.info("Enter into: ActivityServiceImpl - deleteActivity");
-    if(id!=0){
-        log.info("Finding the activity with ID {}",id);
-        Activity activity = activityRepository.findById(id).get();
-        activity.setDeleteFlag(true);
-        log.info("Eliminated logically the activity");
-        activityRepository.save(activity);
-        log.info("Finish - method : deleteActivity");
-    } else {
-        log.error("Error activity not found with this ID {}", id);
-        throw new Exception();
-    }
+        if (id != 0) {
+            log.info("Finding the activity with ID {}", id);
+            Activity activity = activityRepository.findById(id).get();
+            activity.setDeleteFlag(true);
+            log.info("Eliminated logically the activity");
+            activityRepository.save(activity);
+            log.info("Finish - method : deleteActivity");
+        } else {
+            log.error("Error activity not found with this ID {}", id);
+            throw new Exception();
+        }
     }
 }

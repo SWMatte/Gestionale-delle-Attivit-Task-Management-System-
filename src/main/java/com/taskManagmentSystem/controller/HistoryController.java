@@ -60,6 +60,18 @@ public class HistoryController {
         }
     }
 
+    @GetMapping("/dueDateForUser")
+    public ResponseEntity<?> findActivityDueDate(@RequestParam int idUser) {
+        try {
+            log.info("Enter into HistoryController - method: findActivityDueDate");
+            List<HistoryResponseDTO> historyResponseDTO = historyService.findActivityDueDate(idUser);
+            return ResponseEntity.ok(historyResponseDTO);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().body("Error with parameters");
+        }
+    }
+
 
     @PostMapping("/count")
     public ResponseEntity<?> countActivity(@RequestBody HistoryFilterDTO historyFilterDTO) {

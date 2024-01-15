@@ -85,4 +85,25 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
     @Query("SELECT COUNT(h) FROM History h WHERE h.statusActivity IN :status AND h.idUser.idUser = :idUser")
     int countActivity( List<StatusActivity> status, int idUser);
 
+
+    @Query("""
+            SELECT new com.taskManagmentSystem.model.DTO.response.HistoryResponseDTO(
+            h.creationHistory,
+            h.presumeEndDateActivity,
+            h.endDateActivity,
+            h.statusActivity,
+            h.note,
+            u.name,
+            u.lastName,
+            a.activityName,
+            a.description,
+            a.activityCategory
+             )
+            FROM History h
+            JOIN h.idUser u
+            JOIN h.idActivity a
+            WHERE u.idUser=:idUser AND DATEDIFF(presumeEndDateActivity,creationHistory) <10
+            ORDER BY h.presumeEndDateActivity
+            """)
+    List<HistoryResponseDTO> findActivityDueDate(int idUser);
 }

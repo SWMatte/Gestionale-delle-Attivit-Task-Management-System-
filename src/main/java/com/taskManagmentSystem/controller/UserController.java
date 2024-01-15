@@ -20,20 +20,6 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping()
-    public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO) {
-        try {
-            log.info("Enter into UserController - method: addUser");
-            userService.createUser(userDTO);
-            log.info("Finish - method: addUser");
-            return ResponseEntity.ok("User added correctly");
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            return ResponseEntity.badRequest().body("Error with parameters");
-        }
-    }
-
-
     @PutMapping()
     public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO) {
         try {
@@ -49,7 +35,7 @@ public class UserController {
 
     @GetMapping()
     @Authorized(roles = Role.ADMIN)
-    public ResponseEntity<?> getUser(@RequestParam String search) {
+    public ResponseEntity<?> getInformationsWithParams(@RequestParam String search) {
         try {
             log.info("Enter into UserController - method: getUser");
             List<User> listUser = userService.filterSearch(search);

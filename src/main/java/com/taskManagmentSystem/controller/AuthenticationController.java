@@ -22,24 +22,28 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDTO request) {
+        log.info("Enter into AuthenticationController - method: register");
+
         try {
-            log.info("Trying to register the user!");
+            log.info("User registered");
             return ResponseEntity.ok(authenticationService.register(request));
         } catch (Exception e) {
-            log.error("The registration failed: " + e.getMessage());
+            log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
-        log.info("Trying to authenticate the user!");
+        log.info("Enter into AuthenticationController - method: authenticate");
         try {
             AuthenticationResponse authorized = authenticationService.authenticate(request);
             return ResponseEntity.ok(authorized);
         } catch (Exception e) {
-            log.error("User unauthorized! Message: " + e.getMessage());
+            log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+
 }

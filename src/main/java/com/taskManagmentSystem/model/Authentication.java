@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -28,7 +29,7 @@ public class Authentication {
     @Enumerated(EnumType.STRING)
     private StatusUser statusUser;
 
-    private LocalDate lastAccess;
+    private Date lastAccess;
 
     @ManyToOne
     @JoinColumn(name = "idUser")

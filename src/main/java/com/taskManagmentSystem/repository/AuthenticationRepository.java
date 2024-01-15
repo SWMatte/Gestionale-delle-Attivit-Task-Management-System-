@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public interface AuthenticationRepository extends JpaRepository<Authentication, Integer> {
 
-
-
     Authentication findByEmail(String email);
     Optional<Authentication> findByIdUserIdUser(int idUser);
 }

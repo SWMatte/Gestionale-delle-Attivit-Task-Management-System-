@@ -9,7 +9,6 @@ import java.util.List;
 public interface UserService {
 
 
-    Authentication createUser(UserDTO userDTO) throws Exception;
 
     void updateUser(UserDTO userDTO) throws Exception;
 

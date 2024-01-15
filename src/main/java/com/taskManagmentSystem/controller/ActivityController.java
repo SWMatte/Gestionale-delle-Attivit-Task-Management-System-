@@ -47,8 +47,7 @@ public class ActivityController {
     @GetMapping()
     public ResponseEntity<?> allActivity(@RequestParam String params,@RequestParam int idUser ) {
         try {
-//            Category category = Category.valueOf(params.toUpperCase());
-            log.info("Enter into ActivityController - method: allActivity");
+             log.info("Enter into ActivityController - method: allActivity");
             List<ActivityResponseDTO> response = activityService.allActivity(params,idUser);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

@@ -69,4 +69,12 @@ public class HistoryServiceImp implements HistoryService {
 
         return number;
     }
+
+    @Override
+    public List<HistoryResponseDTO> findActivityDueDate(int idUser) {
+        log.info("Enter into: HistoryServiceImp - findActivityDueDate");
+        log.info("Fetch all data from this id user {} ", idUser);
+        List<HistoryResponseDTO> historyResponseDTO = historyRepository.findActivityDueDate(idUser);
+        return historyResponseDTO;
+    }
 }

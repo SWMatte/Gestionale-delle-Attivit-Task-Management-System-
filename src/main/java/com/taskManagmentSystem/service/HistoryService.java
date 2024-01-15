@@ -17,4 +17,7 @@ public interface HistoryService {
     int countActivity(StatusActivity[] status, int idUser);
 
 
+    List<HistoryResponseDTO> findActivityDueDate ( int idUser);
+
+
 }
