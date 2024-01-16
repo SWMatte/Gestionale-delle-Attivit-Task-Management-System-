@@ -5,6 +5,13 @@ import com.taskManagmentSystem.model.DTO.request.UserDTO;
 import com.taskManagmentSystem.model.Role;
 import com.taskManagmentSystem.model.User;
 import com.taskManagmentSystem.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +22,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @Slf4j
+@Tag(name = "UserController", description = "Controller per la gestione dell'user")
 public class UserController {
     @Autowired
     private UserService userService;
 
 
     @PutMapping()
+
     public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO) {
         try {
             log.info("Enter into UserController - method: updateUser");
@@ -53,6 +62,10 @@ public class UserController {
     }
 
     @GetMapping("/specificage")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = User.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
     public ResponseEntity<?> numberUnderSpecificAge(@RequestParam String search) {
         try {
             log.info("Enter into UserController - method: numberSpecificAge");
@@ -66,7 +79,13 @@ public class UserController {
     }
 
     @GetMapping("/betweenage")
-    public ResponseEntity<?> numberBetweenAge(@RequestParam String firstValue, @RequestParam String secondValue) {
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = User.class), mediaType = "application/json") }),
+     })
+    public ResponseEntity<?> numberBetweenAge(
+            @Parameter(description = "First value range age") @RequestParam(required = true) String firstValue,
+            @Parameter(description = "Second value range age", required = true) @RequestParam(defaultValue = "50") String secondValue){
+
         try {
             log.info("Enter into UserController - method: numberBetweenAge");
             int number = userService.betweenSpecificAge(firstValue,secondValue);
